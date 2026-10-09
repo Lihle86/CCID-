@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCID Public Safety CBD App</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --ccid-green: #2e7d32;
+            --ccid-dark: #1b5e20;
+            --danger-red: #c62828;
+            --light-bg: #f4f4f9;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: #333;
+        }
+        header {
+            background-color: #2e7d32; 
+            color: white; 
+            padding: 20px 15px; 
+            text-align: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+        }
+        .lang-selector {
+            padding: 6px 12px; 
+            border-radius: 20px; 
+            border: 1px solid #ffffff33; 
+            font-size: 14px; 
+            background-color: #ffffff22; 
+            color: white; 
+            font-weight: 500; 
+            outline: none; 
+            cursor: pointer;
+        }
+        .container {
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            border-left: 4px solid var(--ccid-green);
+            padding-left: 8px;
+        }
+        .contact-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .btn-emergency { background-color: var(--danger-red); }
+        .btn-general { background-color: var(--ccid-green); }
+        
+        .feed-post {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+        .post-meta {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 8px;
+        }
+        .post-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .media-placeholder {
+            background-color: #e0e0e0;
+            height: 180px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+            border: 2px dashed #bbb;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="ccid-logo.png" alt="Cape Town CCID Badge" style="height: 65px; width: 65px; object-fit: contain; margin-bottom: 8px; border-radius: 50%; background-color: white; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+        <h2 id="app-title" style="margin: 5px 0 12px 0; font-size: 20px; letter-spacing: 0.5px;">CCID Safety & Updates</h2>
+        <select class="lang-selector" id="languageSelect" onchange="changeLanguage(this.value)">
+            <option value="en" style="color:#333;">🇬🇧 English</option>
+            <option value="af" style="color:#333;">🇿🇦 Afrikaans</option>
+            <option value="xh" style="color:#333;">🇿🇦 isiXhosa</option>
+            <option value="de" style="color:#333;">🇩🇪 Deutsch</option>
+            <option value="fr" style="color:#333;">🇫🇷 Français</option>
+        </select>
+    </header>
+
+    <div class="container">
+        <div class="section-title" id="title-contacts">Report Incidents & Complaints</div>
+        
+        <div class="contact-card">
+            <div id="label-emergency-desc">For active crimes, medical emergencies, or safety threats:</div>
+            <a href="tel:0824157127" class="btn btn-emergency">📞 Call 24-HR Safety (082 415 7127)</a>
+            <a href="tel:0214678001" class="btn btn-emergency" style="background-color: #b71c1c;">📞 Call SAPS Central City</a>
+        </div>
+
+        <div class="contact-card">
+            <div id="label-general-desc">For municipal issues, burst pipes, or general inquiries:</div>
+            <a href="tel:0214807700" class="btn btn-general">📞 Call City Services (021 480 7700)</a>
+        </div>
+
+        <div class="section-title" id="title-feed">Official CCID Work Updates</div>
+        
+        <div class="feed-post">
+            <div class="post-meta">📍 Precinct 2 (Retail Hub) • Just Now</div>
+            <div class="post-title" id="post1-title">CCID Safety Officers Securing St George's Mall</div>
+            <div id="post1-body">Public safety officers are out on foot patrol conducting morning visibility sweeps to keep shoppers and business entrances safe.</div>
+            <div class="media-placeholder" onclick="loadImage(this, 'https://unsplash.com')">
+                🖼️ Tap to view picture (Uses Data)
+            </div>
+        </div>
+
+        <div class="feed-post">
+            <div class="post-meta">📍 Precinct 4 (East City) • 2 Hours Ago</div>
+            <div class="post-title" id="post2-title">Urban Management Team Cleaning Loop Street</div>
+            <div id="post2-body">Our daytime sweepers completed a deep cleaning cycle removing litter and maintaining CBD standards.</div>
+            <div class="media-placeholder" onclick="loadImage(this, 'https://unsplash.com')">
+                🖼️ Tap to view picture (Uses Data)
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                title: "CCID Safety & Updates",
+                contacts: "Report Incidents & Complaints",
+                emergDesc: "For active crimes, medical emergencies, or safety threats:",
+                genDesc: "For municipal issues, burst pipes, or general inquiries:",
+                feed: "Official CCID Work Updates"
+            },
+            af: {
+                title: "SSID Veiligheid & Opdaterings",
+                contacts: "Meld Intraste & Klagtes Aansoek",
+                emergDesc: "Vir aktiewe misdade, mediese noodgevalle of veiligheidsbedreigings:",
+                genDesc: "Vir munisipale kwessies, gebarste pype of algemene navrae:",
+                feed: "Amptelike SSID Werkopdaterings"
+            },
+            xh: {
+                title: "Khuseleko lwe-CCID kunye noHlaziyo",
+                contacts: "Bika iziganeko kunye nezikhalazo",
+                emergDesc: "Zolwaphulo-mthetho olusebenzayo, iimeko zongxamiseko zamayeza:",
+                genDesc: "Miba kamasipala, imibhobho egqabhukileyo okanye imibuzo jikelele:",
+                feed: "Uhlaziyo lomsebenzi osemthethweni we-CCID"
+            },
+            de: {
+                title: "CCID Sicherheit & Updates",
+                contacts: "Vorfälle & Beschwerden melden",
+                emergDesc: "Bei Straftaten, medizinischen Notfällen oder Sicherheitsbedrohungen:",
+                genDesc: "Bei kommunalen Problemen, Rohrebrüchen oder allgemeinen Fragen:",
+                feed: "Offizielle Updates der CCID-Arbeit"
+            },
+            fr: {
+                title: "CCID Sécurité & Mises à jour",
+                contacts: "Signaler des incidents et des plaintes",
+                emergDesc: "Pour les crimes actifs, les urgences médicales ou les menaces:",
+                genDesc: "Pour les problèmes municipaux, les tuyaux cassés ou les questions:",
+                feed: "Mises à jour officielles du travail du CCID"
+            }
+        };
+
+        function initLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const langCode = userLang.substring(0, 2);
+            if (translations[langCode]) {
+                document.getElementById('languageSelect').value = langCode;
+                changeLanguage(langCode);
+            }
+        }
+
+        function changeLanguage(lang) {
+            document.getElementById('app-title').innerText = translations[lang].title;
+            document.getElementById('title-contacts').innerText = translations[lang].contacts;
+            document.getElementById('label-emergency-desc').innerText = translations[lang].emergDesc;
+            document.getElementById('label-general-desc').innerText = translations[lang].genDesc;
+            document.getElementById('title-feed').innerText = translations[lang].feed;
+        }
+
+        function loadImage(element, url) {
+            element.innerHTML = `<img src="${url}" style="width:100%; height:100%; object-fit:cover; border-radius:6px;">`;
+            element.style.border = "none";
+            element.onclick = null;
+        }
+
+        window.onload = initLanguage;
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        }
+    </script>
+</body>
+</html>
