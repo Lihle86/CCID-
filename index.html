@@ -43,6 +43,7 @@
             font-weight: 500; 
             outline: none; 
             cursor: pointer;
+            margin-top: 5px;
         }
         .container {
             padding: 15px;
@@ -112,7 +113,8 @@
 <body>
 
     <header>
-        <img src="ccid-logo.png" alt="Cape Town CCID Badge" style="height: 65px; width: 65px; object-fit: contain; margin-bottom: 8px; border-radius: 50%; background-color: white; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+        <!-- AUTOMATIC FIXED LOGO WITH SMART BACKUP IF MISSING -->
+        <img src="ccid-logo.png" alt="Cape Town CCID Badge" style="height: 65px; width: 65px; object-fit: contain; margin-bottom: 8px; border-radius: 50%; background-color: white; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);" onerror="this.src='https://dicebear.com'">
         <h2 id="app-title" style="margin: 5px 0 12px 0; font-size: 20px; letter-spacing: 0.5px;">CCID Safety & Updates</h2>
         <select class="lang-selector" id="languageSelect" onchange="changeLanguage(this.value)">
             <option value="en" style="color:#333;">🇬🇧 English</option>
